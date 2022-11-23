@@ -15,7 +15,7 @@
 t_complex	init_complex(double x, double y)
 {
 	t_complex	n;
-	
+
 	n.x = x;
 	n.y = y;
 	return (n);
@@ -32,15 +32,20 @@ static int	(*get_function(char *name)) (t_fractol *fractol)
 		function = &julia;
 	else if (!ft_strncmp(name, "burning ship", 13))
 		function = &burning_ship;
+	else if (!ft_strncmp(name, "mandelbar", 10))
+		function = &mandelbar;
+	else if (!ft_strncmp(name, "perpendicular mandelbrot", 26))
+		function = &perpendicular_mandelbrot;
 	return (function);
 }
 
-static void	set_value(t_fractol *fractol)
+void	set_value(t_fractol *fractol)
 {
 	fractol->value.max_iterations = 50;
 	fractol->value.min = init_complex(-2.5, -1);
 	fractol->value.max = init_complex(1, 1);
 	zoom_color(0x00FF0000, fractol, -1);
+	fractol->value.patron = 1;
 }
 
 static t_img	init_image(void	*mlx)

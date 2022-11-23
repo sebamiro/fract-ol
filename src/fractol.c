@@ -12,6 +12,7 @@
 
 #include "../includes/fractol.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 static void	start(int ac, char **av)
 {
@@ -22,6 +23,7 @@ static void	start(int ac, char **av)
 	fractol = init_window(mlx, av[1]);
 	if (fractol->set[0] == 'j')
 		fractol->value.k = init_complex(ft_atof(av[2]), ft_atof(av[3]));
+	fractol->fd = open("mandelbrot.txt", O_RDWR);
 	draw(fractol);
 	if (ac)
 		mlx_hook(fractol->mlx.win, 17, 0, close_program, fractol);

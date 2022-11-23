@@ -20,17 +20,17 @@ static double	interpolate(double start, double end, double inter)
 int	zoom(int key, int x, int y, t_fractol *fractol)
 {
 	t_complex	mouse;
-	t_value	*value;
-	double	zoom;
-	double	inter;
-	
+	t_value		*value;
+	double		zoom;
+	double		inter;
+
 	if (key != 4 && key != 5)
 		return (0);
 	value = &fractol->value;
 	mouse = init_complex(
-		(double)x / (W / (value->max.x - value->min.x))
-		+ value->min.x, (double)y / (H / (value->max.y
-			- value->min.y)) * -1 + value->max.y);
+			(double)x / (W / (value->max.x - value->min.x))
+			+ value->min.x, (double)y / (H / (value->max.y
+					- value->min.y)) * -1 + value->max.y);
 	if (key == 4)
 		zoom = 0.8;
 	else

@@ -15,9 +15,9 @@
 void	move(int key, t_fractol *fractol)
 {
 	t_complex	m;
-	
+
 	m = init_complex(fabs(fractol->value.max.x - fractol->value.min.x) * 0.05,
-		fabs(fractol->value.max.y - fractol->value.min.y) * 0.05);
+			fabs(fractol->value.max.y - fractol->value.min.y) * 0.05);
 	if (key == 123)
 	{
 		fractol->value.min.x -= m.x;
@@ -33,10 +33,19 @@ void	move(int key, t_fractol *fractol)
 		fractol->value.min.y += m.y;
 		fractol->value.max.y += m.y;
 	}
-	else 
+	else
 	{
 		fractol->value.min.y -= m.y;
 		fractol->value.max.y -= m.y;
 	}
+	draw(fractol);
+}
+
+void	change_iterations(int key, t_fractol *fractol)
+{
+	if (key == 69)
+		fractol->value.max_iterations += 5;
+	else if (fractol->value.max_iterations > 5)
+		fractol->value.max_iterations -= 5;
 	draw(fractol);
 }

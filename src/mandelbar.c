@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 20:05:38 by smiro             #+#    #+#             */
-/*   Updated: 2022/11/19 20:05:44 by smiro            ###   ########.fr       */
+/*   Created: 2022/11/23 12:54:55 by smiro             #+#    #+#             */
+/*   Updated: 2022/11/23 12:54:58 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int	julia(t_fractol *fractol)
+int	mandelbar(t_fractol *fractol)
 {
 	int			i;
 	t_complex	z;
@@ -24,12 +24,12 @@ int	julia(t_fractol *fractol)
 	while (i < fractol->value.max_iterations
 		&& z2.x + z2.y < 4)
 	{
-		z = init_complex(z2.x - z2.y + fractol->value.k.x,
-				2 * z.x * z.y + fractol->value.k.y);
+		z = init_complex(z2.x - z2.y + fractol->value.c.x,
+				-2 * z.x * z.y + fractol->value.c.y);
 		z2 = init_complex(z.x * z.x, z.y * z.y);
 		i++;
 	}
 	if (i == fractol->value.max_iterations)
-		return (500);
-	return ((z2.x + z2.y) + i / 10);
+		return (-1);
+	return ((z2.x + z2.y * fractol->value.patron) + i / 10);
 }

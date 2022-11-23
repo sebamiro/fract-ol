@@ -31,6 +31,10 @@ void	draw(t_fractol *fractol);
 
 void	zoom_color(int	color, t_fractol *fractol, int i);
 
+void	set_value(t_fractol *fractol);
+
+void	change_iterations(int key, t_fractol *fractol);
+
 //fractal sets
 
 int	mandelbrot(t_fractol *fractol);
@@ -38,6 +42,10 @@ int	mandelbrot(t_fractol *fractol);
 int	julia(t_fractol *fractol);
 
 int	burning_ship(t_fractol *fractol);
+
+int	mandelbar(t_fractol *fractol);
+
+int	perpendicular_mandelbrot(t_fractol *fractol);
 
 //utils
 

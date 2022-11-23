@@ -14,15 +14,15 @@
 
 int	burning_ship(t_fractol *fractol)
 {
-	int				i;
+	int			i;
 	t_complex	z;
-	t_complex z2;
-	
+	t_complex	z2;
+
 	i = 0;
 	z = init_complex(fractol->value.c.x, fractol->value.c.y);
 	z2 = init_complex(z.x * z.x, z.y * z.y);
 	while (i < fractol->value.max_iterations
-				&& z2.x + z2.y < 4)
+		&& z2.x + z2.y < 4)
 	{
 		z = init_complex(z2.x - z2.y + fractol->value.c.x,
 				fabs(2 * z.x * z.y) + fractol->value.c.y);
@@ -30,6 +30,6 @@ int	burning_ship(t_fractol *fractol)
 		i++;
 	}
 	if (i == fractol->value.max_iterations)
-		return (500);
-	return ((z2.x + z2.y) * i);
+		return (-1);
+	return ((z2.x + z2.y) + i / 2);
 }

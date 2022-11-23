@@ -14,7 +14,7 @@ NAME		=	fractol
 
 SRCS		=	src/fractol.c src/utils.c src/init.c src/mandelbrot.c src/hooks.c \
 				src/draw.c src/burning_ship.c src/julia.c src/mouse_hook.c  \
-				src/keyboard_hook.c
+				src/keyboard_hook.c src/mandelbar.c src/perpendicular_mandelbrot.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -25,7 +25,7 @@ Printf		=	$(Printf_DIR)/libftprintf.a
 Fract_Libs	=	includes/fractol.h includes/defines.h
 
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -I /includes/.
+CFLAGS		=	-Wall -Wextra -Werror -O3 -I /includes/.
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -Imlx -c $< -o $@

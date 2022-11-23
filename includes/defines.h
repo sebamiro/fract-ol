@@ -50,6 +50,7 @@ typedef struct	s_value
 	t_complex	k;
 	t_complex	c;
 	int				color;
+	int				patron;
 }								t_value;
 
 typedef struct	s_fractol
@@ -59,6 +60,7 @@ typedef struct	s_fractol
 	t_mlx	mlx;
 	t_img	img;
 	t_value	value;
+	int			fd;
 }								t_fractol;	
 
 # define W 1294
