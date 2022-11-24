@@ -26,9 +26,7 @@ int	key_hook(int key, t_fractol *vars)
 	else if (key >= 123 && key <= 126)
 		move(key, vars);
 	else if (key == 15)
-	{
 		set_value(vars);
-	}
 	else if (key == 69 || key == 78)
 		change_iterations(key, vars);
 	else if (key == 35)

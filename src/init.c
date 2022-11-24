@@ -36,6 +36,16 @@ static int	(*get_function(char *name)) (t_fractol *fractol)
 		function = &mandelbar;
 	else if (!ft_strncmp(name, "perpendicular mandelbrot", 26))
 		function = &perpendicular_mandelbrot;
+	else if (!ft_strncmp(name, "celtic mandelbrot", 20))
+		function = &celtic_mandelbrot;
+	else if (!ft_strncmp(name, "celtic mandelbar", 20))
+			function = &celtic_mandelbar;
+	else if (!ft_strncmp(name, "perpendicular celtic", 21))
+			function = &perpendicular_celtic;
+	else if (!ft_strncmp(name, "heart", 6))
+					function = &heart;
+	else if (!ft_strncmp(name, "buffalo", 8))
+									function = &buffalo;
 	return (function);
 }
 
@@ -53,6 +63,8 @@ static t_img	init_image(void	*mlx)
 	t_img	img;
 
 	img.img = mlx_new_image(mlx, W, H);
+	if (!img.img)
+		exit(1);
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bits_per_pixel,
 			&img.line_length,
@@ -70,6 +82,8 @@ t_fractol	*init_window(void *mlx, char *set)
 	fractol->set = set;
 	fractol->mlx.mlx = mlx;
 	fractol->mlx.win = mlx_new_window(fractol->mlx.mlx, W, H, set);
+	if (!fractol->mlx.win)
+		exit(1);
 	fractol->img = init_image(mlx);
 	set_value(fractol);
 	fractol->function = get_function(set);

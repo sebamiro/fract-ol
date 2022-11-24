@@ -12,7 +12,7 @@
 
 #include "../includes/fractol.h"
 
-static void	pixel_put(t_img *img, int x, int y, int color)
+void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -30,7 +30,7 @@ void	zoom_color(int color, t_fractol *fractol, int i)
 	r = (color >> 16) & 0xFF;
 	g = (color >> 8) & 0xFF;
 	b = color & 0xFF;
-	if (i > 0 || g == 255)
+	if (i > 0)
 		n = 5;
 	else
 		n = -5;
@@ -77,6 +77,8 @@ void	draw(t_fractol *fractol)
 		}
 		y++;
 	}
+	controls(fractol);
 	mlx_put_image_to_window(fractol->mlx.mlx,
 		fractol->mlx.win, fractol->img.img, 0, 0);
+	put_text(&fractol->mlx);
 }

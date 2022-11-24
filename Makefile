@@ -12,9 +12,11 @@
 
 NAME		=	fractol
 
-SRCS		=	src/fractol.c src/utils.c src/init.c src/mandelbrot.c src/hooks.c \
-				src/draw.c src/burning_ship.c src/julia.c src/mouse_hook.c  \
-				src/keyboard_hook.c src/mandelbar.c src/perpendicular_mandelbrot.c
+SRCS		=	src/fractol.c src/utils.c src/keyboard_hook.c src/init.c  src/hooks.c \
+				src/draw.c src/mouse_hook.c src/fractals/mandelbrot.c src/fractals/julia.c \
+				src/fractals/burning_ship.c src/fractals/mandelbar.c src/fractals/perpendicular_mandelbrot.c \
+				src/fractals/celtic_mandelbrot.c src/fractals/celtic_mandelbar.c src/fractals/perpendicular_celtic.c \
+				src/fractals/heart.c src/fractals/buffalo.c src/draw_controls.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -41,7 +43,7 @@ $(NAME):	$(OBJS) $(Fract_Libs)
 clean:
 	@$(MAKE) fclean -sC $(Lib_DIR)
 	@$(MAKE) fclean -sC $(Printf_DIR)
-	@$(RM) $(NAME) $(OBJS)
+	@$(RM) $(OBJS)
 	
 fclean:
 	@$(MAKE) clean
