@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
+# include <pthread.h>
 # include "libft/libft.h"
 # include "printf/ft_printf.h"
 
@@ -49,6 +50,8 @@ typedef struct s_value
 	t_complex	pixel;
 	t_complex	k;
 	t_complex	c;
+	int			start_y;
+	int			end_y;
 	int			color;
 	int			patron;
 }								t_value;
@@ -60,9 +63,9 @@ typedef struct s_fractol
 	t_mlx	mlx;
 	t_img	img;
 	t_value	value;
-	int		fd;
 }								t_fractol;	
 
+#	define TH 6
 # define W 1294
 # define H 800
 

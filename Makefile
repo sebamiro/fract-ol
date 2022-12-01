@@ -38,7 +38,7 @@ all:
 	@$(MAKE) $(NAME)
 
 $(NAME):	$(OBJS) $(Fract_Libs)
-	@$(CC) $(OBJS) -Lmlx -lmlx $(Lib) $(Printf) -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJS) -lpthread -Lmlx -lmlx $(Lib) $(Printf) -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	@$(MAKE) fclean -sC $(Lib_DIR)

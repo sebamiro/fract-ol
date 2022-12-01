@@ -31,6 +31,8 @@ int	key_hook(int key, t_fractol *vars)
 		change_iterations(key, vars);
 	else if (key == 35)
 		vars->value.patron *= -1;
+	else if (key == 38)
+		change_julia(vars);
 	draw(vars);
 	return (0);
 }

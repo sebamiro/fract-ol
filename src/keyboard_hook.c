@@ -41,6 +41,16 @@ void	move(int key, t_fractol *fractol)
 	draw(fractol);
 }
 
+void	change_julia(t_fractol *fractol)
+{
+	int	x;
+	int	y;
+	
+	mlx_mouse_get_pos(fractol->mlx.win, &x, &y);
+	fractol->value.k.x = fractol->value.min.x + x * fractol->value.pixel.x;
+	fractol->value.k.y = fractol->value.min.y + y * fractol->value.pixel.y;
+}
+
 void	change_iterations(int key, t_fractol *fractol)
 {
 	if (key == 69)
