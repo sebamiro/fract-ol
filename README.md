@@ -4,7 +4,7 @@
 
 The objective of the project is to create a fractal exploration program, learning to use the MinilibX library.
 
-<img width="1289" alt="Screen Shot 2023-01-17 at 5 54 15 PM" src="https://user-images.githubusercontent.com/88943673/212962003-5bfa2d2c-ebf4-4202-b12a-ca5d79f26704.png">
+<img width="1292" alt="Screen Shot 2023-01-17 at 5 59 10 PM" src="https://user-images.githubusercontent.com/88943673/212963138-4ac4e02a-7189-4516-bca3-64e2ec90bc24.png">
 
 List of fractals:
 
