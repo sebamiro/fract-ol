@@ -61,7 +61,7 @@ Run
 |`Sroll down`| zoom out|
 |`ESC ❌`|Close|
 
-##  🔸 Contact 📬
+## Contact 📬
 
   ▪ Via email: seba2miro@gmail.com
   
