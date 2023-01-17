@@ -30,9 +30,8 @@ List of fractals:
 
 Clone
 
-```
-https://github.com/sebamiro/fractol42.git
-```
+```https://github.com/sebamiro/fractol42.git```
+
 
 Enter the folder
 
