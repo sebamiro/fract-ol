@@ -45,7 +45,7 @@ Compile
 
 Run
 
-```./fractol name_fractal```
+```./fractol "fractal_name"```
 
 ## Controls 🕹
 
