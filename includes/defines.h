@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include "libft/libft.h"
-# include "printf/ft_printf.h"
 
 typedef struct s_complex
 {
@@ -54,6 +53,7 @@ typedef struct s_value
 	int			end_y;
 	int			color;
 	int			patron;
+	int			rep;
 }								t_value;
 
 typedef struct s_fractol
@@ -63,10 +63,11 @@ typedef struct s_fractol
 	t_mlx	mlx;
 	t_img	img;
 	t_value	value;
-}								t_fractol;	
+	int		sierpinsky;
+}								t_fractol;
 
 #	define TH 6
-# define W 1294
-# define H 800
+# define W 1928
+# define H 1080
 
 #endif

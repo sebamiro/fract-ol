@@ -20,39 +20,6 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	zoom_color(int color, t_fractol *fractol, int i)
-{
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-	int				n;
-
-	r = (color >> 16) & 0xFF;
-	g = (color >> 8) & 0xFF;
-	b = color & 0xFF;
-	if (i > 0)
-		n = 5;
-	else
-		n = -5;
-	if ((r > 0 && r <= 255 && n > 0) || (g == 0 && b > 0 && b <= 255 && n < 0))
-	{
-		r -= n;
-		b += n;
-	}
-	else if (b > 0 || (r == 0 && n < 0))
-	{
-		b -= n;
-		g += n;
-	}
-	fractol->value.color = (0 << 24 | r << 16 | g << 8 | b);
-}
-
-int	get_color(int n, t_fractol *fractol)
-{
-	if (n == -1 && fractol)
-		return (0);
-	return ((0x00FF0000 >> n) ^ fractol->value.color);
-}
 
 static void	*draw_segment(t_fractol *fractol)
 {
@@ -100,6 +67,6 @@ void	draw(t_fractol *fractol)
 		pthread_join(thread[i], NULL);
 	controls(fractol);
 	mlx_put_image_to_window(fractol->mlx.mlx,
-		fractol->mlx.win, fractol->img.img, 0, 0);
-	put_text(&fractol->mlx, fractol->set[0]);
+	  fractol->mlx.win, fractol->img.img, 0, 0);
+	put_text(fractol);
 }

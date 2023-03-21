@@ -16,7 +16,6 @@ int	close_program(t_fractol *vars)
 {
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.win);
 	exit(0);
-	return (0);
 }
 
 int	key_hook(int key, t_fractol *vars)
@@ -31,8 +30,22 @@ int	key_hook(int key, t_fractol *vars)
 		change_iterations(key, vars);
 	else if (key == 35)
 		vars->value.patron *= -1;
+	else if (key >= 83 && key <= 92)
+		vars->value.patron = key - 82;
+	else if (key == 82)
+		vars->value.rep *= -1;
 	else if (key == 38)
 		change_julia(vars);
+	else if (key >= 18 && key <= 29)
+		change_set(key, vars);
+	else
+		return (0);
+	if (vars->sierpinsky)
+	{
+		if (key == 49)
+			sierpinsky(vars);
+		return 0;
+	}
 	draw(vars);
 	return (0);
 }

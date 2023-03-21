@@ -24,7 +24,7 @@ void		move(int key, t_fractol *fractol);
 void		draw(t_fractol *fractol);
 void		pixel_put(t_img *img, int x, int y, int color);
 void		controls(t_fractol *fractol);
-void		put_text(t_mlx *mlx, char c);
+void		put_text(t_fractol *fractol);
 void		zoom_color(int color, t_fractol *fractol, int i);
 void		set_value(t_fractol *fractol);
 void		change_iterations(int key, t_fractol *fractol);
@@ -41,5 +41,11 @@ int			buffalo(t_fractol *fractol);
 float		ft_atof(char *n);
 void		ft_check(int ac, char **av);
 void		change_julia(t_fractol *fractol);
+int			(*get_function(char *name)) (t_fractol *fractol);
+void		change_set(int key, t_fractol *fractol);
+int			get_color(int n, t_fractol *fractol);
+void		sierpinsky(t_fractol *fractol);
+int			darker(int color, int y);
+char*		str_tolower(char *str);
 
 #endif

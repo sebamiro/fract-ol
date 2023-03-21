@@ -31,6 +31,8 @@ int	burning_ship(t_fractol *fractol)
 	}
 	if (i == fractol->value.max_iterations)
 		return (-1);
+	if (fractol->value.rep == -1)
+		return (i);
 	return ((z2.x + z2.y * fractol->value.patron)
 		+ i * fractol->value.patron / 10);
 }

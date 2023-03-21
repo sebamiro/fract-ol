@@ -12,18 +12,18 @@
 
 #include "../includes/fractol.h"
 
-static void	start(int ac, char **av)
+static void	start(char **av)
 {
 	void		*mlx;
 	t_fractol	*fractol;
 
 	mlx = mlx_init();
 	fractol = init_window(mlx, av[1]);
-	if (fractol->set[0] == 'j' &&  ac > 2)
-		fractol->value.k = init_complex(ft_atof(av[2]), ft_atof(av[3]));
-	else if (fractol->set[0] == 'j')
-		fractol->value.k = init_complex(-0.285, -0.656);
-	draw(fractol);
+	fractol->value.k = init_complex(-0.285, -0.656);
+	if (fractol->sierpinsky)
+		sierpinsky(fractol);
+	else
+		draw(fractol);
 	mlx_hook(fractol->mlx.win, 17, 0, close_program, fractol);
 	mlx_hook(fractol->mlx.win, 2, 0, key_hook, fractol);
 	mlx_hook(fractol->mlx.win, 4, 0, zoom, fractol);
@@ -32,7 +32,8 @@ static void	start(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	ft_check(ac, av);
-	start(ac, av);
+	if (ac != 1)
+		ft_check(ac, av);
+	start(av);
 	return (0);
 }

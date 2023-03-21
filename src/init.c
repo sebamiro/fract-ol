@@ -21,7 +21,7 @@ t_complex	init_complex(double x, double y)
 	return (n);
 }
 
-static int	(*get_function(char *name)) (t_fractol *fractol)
+int	(*get_function(char *name)) (t_fractol *fractol)
 {
 	int	(*function)(t_fractol *fractol);
 
@@ -39,13 +39,13 @@ static int	(*get_function(char *name)) (t_fractol *fractol)
 	else if (!ft_strncmp(name, "celtic mandelbrot", 20))
 		function = &celtic_mandelbrot;
 	else if (!ft_strncmp(name, "celtic mandelbar", 20))
-			function = &celtic_mandelbar;
+		function = &celtic_mandelbar;
 	else if (!ft_strncmp(name, "perpendicular celtic", 21))
-			function = &perpendicular_celtic;
+		function = &perpendicular_celtic;
 	else if (!ft_strncmp(name, "heart", 6))
-					function = &heart;
+		function = &heart;
 	else if (!ft_strncmp(name, "buffalo", 8))
-									function = &buffalo;
+		function = &buffalo;
 	return (function);
 }
 
@@ -56,6 +56,8 @@ void	set_value(t_fractol *fractol)
 	fractol->value.max = init_complex(1, 1);
 	zoom_color(0x00FF0000, fractol, -1);
 	fractol->value.patron = 1;
+	fractol->value.rep = -1;
+	fractol->sierpinsky = 0;
 }
 
 static t_img	init_image(void	*mlx)
@@ -79,13 +81,18 @@ t_fractol	*init_window(void *mlx, char *set)
 	fractol = (t_fractol *)malloc(sizeof(t_fractol));
 	if (!fractol)
 		exit(1);
+	if (!set)
+		set = "mandelbrot";
 	fractol->set = set;
 	fractol->mlx.mlx = mlx;
-	fractol->mlx.win = mlx_new_window(fractol->mlx.mlx, W, H, set);
+	fractol->mlx.win = mlx_new_window(fractol->mlx.mlx, W, H, "Fract-ol");
 	if (!fractol->mlx.win)
 		exit(1);
 	fractol->img = init_image(mlx);
 	set_value(fractol);
-	fractol->function = get_function(set);
+	if (!ft_strncmp(set, "sierpinsky", 11))
+		fractol->sierpinsky = 1;
+	else
+		fractol->function = get_function(set);
 	return (fractol);
 }
