@@ -20,6 +20,7 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+
 static void	*draw_segment(t_fractol *fractol)
 {
 	double	x;
@@ -66,6 +67,6 @@ void	draw(t_fractol *fractol)
 		pthread_join(thread[i], NULL);
 	controls(fractol);
 	mlx_put_image_to_window(fractol->mlx.mlx,
-		fractol->mlx.win, fractol->img.img, 0, 0);
+	  fractol->mlx.win, fractol->img.img, 0, 0);
 	put_text(fractol);
 }

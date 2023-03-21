@@ -66,7 +66,7 @@ typedef struct s_fractol
 	int		sierpinsky;
 }								t_fractol;
 
-#	define TH 10
+#	define TH 6
 # define W 1928
 # define H 1080
 
