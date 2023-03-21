@@ -52,7 +52,7 @@ void	change_julia(t_fractol *fractol)
 
 void	change_iterations(int key, t_fractol *fractol)
 {
-	if (key == 69)
+	if (key == 69 || key == 40)
 	{
 		if (fractol->value.max_iterations > 500)
 			fractol->value.max_iterations *= 5;

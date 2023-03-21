@@ -26,7 +26,7 @@ int	key_hook(int key, t_fractol *vars)
 		move(key, vars);
 	else if (key == 15)
 		set_value(vars);
-	else if (key == 69 || key == 78)
+	else if (key == 69 || key == 78 || key == 40 || key == 37)
 		change_iterations(key, vars);
 	else if (key == 35)
 		vars->value.patron *= -1;
@@ -38,14 +38,14 @@ int	key_hook(int key, t_fractol *vars)
 		change_julia(vars);
 	else if (key >= 18 && key <= 29)
 		change_set(key, vars);
-	else
-		return (0);
-	if (vars->sierpinsky)
+	else if (vars->sierpinsky)
 	{
 		if (key == 49)
 			sierpinsky(vars);
 		return 0;
 	}
+	else
+		return (0);
 	draw(vars);
 	return (0);
 }

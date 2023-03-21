@@ -32,11 +32,11 @@ static void	put_text_justified(t_fractol *fractol, int w, int h, char *str)
 void	put_text(t_fractol *fractol)
 {
 	int	n = W / 7;
-	put_text_justified(fractol, n, H - 16, "Move: Arrows");
-	put_text_justified(fractol, n * 1.75, H - 16, "Zoom: scroll up/down");
-	put_text_justified(fractol, n * 2.80, H - 16, "Change patron: p");
-	put_text_justified(fractol, n * 3.75, H - 16, "More/Less iterations: +/-");
-	put_text_justified(fractol, n * 5.25, H - 16, "Reset: r");
+	// put_text_justified(fractol, n, H - 16, "Move: Arrows");
+	// put_text_justified(fractol, n * 1.75, H - 16, "Zoom: scroll up/down");
+	// put_text_justified(fractol, n * 2.80, H - 16, "Change patron: p");
+	// put_text_justified(fractol, n * 3.75, H - 16, "More/Less iterations: +/-");
+	// put_text_justified(fractol, n * 5.25, H - 16, "Reset: r");
 	put_text_justified(fractol, n * 6, H - 16, "Exit: esc");
 	mlx_string_put(fractol->mlx.mlx, fractol->mlx.win, 10, H - 16, 0x00333333, fractol->set);
 	if (fractol->set[0] == 'j')
