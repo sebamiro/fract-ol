@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fractol.h"
+#include "fractol.h"
 
 int	celtic_mandelbar(t_fractol *fractol)
 {

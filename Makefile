@@ -1,126 +1,81 @@
 # **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/11 15:23:29 by smiro             #+#    #+#              #
-#    Updated: 2023/03/20 17:16:23 by smiro            ###   ########.fr        #
-#                                                                              #
+#    Makefile                                                                  #
 # **************************************************************************** #
 
-################################################################################
-################################################################################
+MAKE		=	make --no-print-directory
 
-NAME		= fractol
-INC			= ./includes/
-INC_HEADERS	= $(INC)fractol.h $(INC)defines.h
+NAME		= fract-ol
+INC			= ./inc/
 
 Lib_DIR		= $(INC)libft/
-Lib_INC		= $(Lib_DIR)libft.h
 FT_LNK		= -L$(Lib_DIR) -lft
-Lib			= $(Lib_DIR)libft.a
 MLX_DIR		= ./mlx/
 
 SRC_DIR		= src/
+BIN_DIR		= bin/
 OBJ_DIR		= obj/
+DEP_DIR		= dep/
 
-COMFLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
-LINKFLAGS	= -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
-CFLAGS		= -I $(INC) -MMD -Wall -Werror -Wextra -O3
-RM			= rm -f
+CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		+= -MMD -MP -MF $(DEP_DIR)$*.d
+RM			= rm -rf
 
-COMFLAGS	= -Imlx
-LINKFLAGS	= -lmlx -Lmlx -lpthread
-
-################################################################################
-### COLORS
-################################################################################
-
-DEL_LINE =		\033[2K
-ITALIC =		\033[3m
-BOLD =			\033[1m
-DEF_COLOR =		\033[0;39m
-GRAY =			\033[0;90m
-RED =			\033[0;91m
-GREEN =			\033[0;92m
-YELLOW =		\033[0;93m
-BLUE =			\033[0;94m
-MAGENTA =		\033[0;95m
-CYAN =			\033[0;96m
-WHITE =			\033[0;97m
-BLACK =			\033[0;99m
-ORANGE =		\033[38;5;209m
-BROWN =			\033[38;2;184;143;29m
-DARK_GRAY =		\033[38;5;234m
-MID_GRAY =		\033[38;5;245m
-DARK_GREEN =	\033[38;2;75;179;82m
-DARK_YELLOW =	\033[38;5;143m
+COMFLAGS	= -Imlx -I $(INC) -I $(Lib_DIR)inc/
+LINKFLAGS	= -lmlx -Lmlx -lpthread $(FT_LNK)
 
 ################################################################################
-################################################################################
 
-SRC_FILES	=	fractol.c \
-				utils.c \
-				keyboard_hook.c \
-				init.c \
-				hooks.c \
-				draw.c \
-				mouse_hook.c \
-				draw_controls.c \
-				color.c \
-				fractals/mandelbrot.c \
-				/fractals/julia.c \
-				/fractals/burning_ship.c \
-				/fractals/mandelbar.c \
-				/fractals/perpendicular_mandelbrot.c \
-				/fractals/celtic_mandelbrot.c \
-				/fractals/celtic_mandelbar.c \
-				/fractals/perpendicular_celtic.c \
-				/fractals/heart.c \
-				/fractals/buffalo.c \
-				sierpinsky.c
+SRC_LIST	:=	$(shell find $(SRC_DIR:/=) -type d)
 
-SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-DEP			= 	$(addsuffix .d, $(basename $(OBJ)))
-B_OBJ		=	$(OBJ)
+SRC			:=	$(shell find $(SRC_DIR:/=) -name '*.c')
+OBJ 		=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.c=.o))
+DEP 		=	$(patsubst $(SRC_DIR)%, $(DEP_DIR)%, $(SRC:.c=.d))
+BIN			=	$(addprefix $(BIN_DIR), $(NAME))
 
-################################################################################
 ################################################################################
 
 all:
 			@$(MAKE) -sC $(Lib_DIR)
 			@$(MAKE) -sC $(MLX_DIR)
 			@cp $(MLX_DIR)libmlx.dylib ./libmlx.dylib
-			@$(MAKE) $(NAME)
+			@$(MAKE) $(BIN)
 
-$(OBJ_DIR)%.o: %.c Makefile
-			@mkdir -p $(dir $@)
-			@printf "\r${ORANGE} | $(BROWN)COMPILING ${ORANGE}|  $(BLUE)< ${MAGENTA}$(notdir $(basename $<)) $(BLUE)> $(DEF_COLOR)%20c"
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
+			@printf "\rcompiling.. $(notdir $<)%20c"
 			@$(CC) $(CFLAGS) $(COMFLAGS) -c $< -o $@
 
-$(NAME):	$(OBJ)
-			@$(CC) $(CFLAGS) $(OBJ) $(FT_LNK) $(LINKFLAGS) -o $(NAME)
-			@echo "\n\n$(BLUE)[$(ORANGE)============$(BLUE)<|$(ORANGE)DONE$(BLUE)|>$(ORANGE)============$(BLUE)] $(DEF_COLOR)"
+$(BIN):	$(OBJ_DIR) $(DEP_DIR) $(BIN_DIR) $(OBJ)
+			@$(CC) $(CFLAGS) $(LINKFLAGS) $(OBJ) -o $(BIN)
+			@printf "\r$(NAME): done%20c\n"
 
--include $(DEP)
+$(BIN_DIR):
+			@mkdir -p $@
+			@echo "creating.. $@"
+
+$(OBJ_DIR):
+			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
+			@echo "creating.. $@"
+
+$(DEP_DIR):
+			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
+			@echo "creating.. $@"
 
 clean:
-			@$(RM) -r $(OBJ_DIR)
 			@$(MAKE) clean -sC $(Lib_DIR)
-			@echo "\n${RED}[$(MAGENTA)Objects removed successfully${RED}]$(DEF_COLOR)\n"
+			@$(RM) $(OBJ_DIR) $(DEP_DIR)
+			@echo "removing.. $(OBJ_DIR)"
+			@echo "removing.. $(DEP_DIR)"
 
 fclean:
-			@$(MAKE) clean
-			@$(RM) $(NAME)
-			@$(RM) libmlx.dylib
 			@$(MAKE) fclean -sC $(Lib_DIR)
-			@echo "\n${RED}[$(MAGENTA)Everything removed successfully${RED}]$(DEF_COLOR)\n"
+			@$(MAKE) clean
+			@$(RM) $(BIN_DIR)
+			@$(RM) libmlx.dylib
+			@echo "removing.. $(BIN_DIR)"
 
 re:
 			@$(MAKE) fclean
 			@$(MAKE)
 
 .PHONY: all clean fclean re
+-include $(DEP)

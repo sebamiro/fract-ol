@@ -6,7 +6,7 @@
 /*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:01:53 by smiro             #+#    #+#             */
-/*   Updated: 2022/11/13 15:04:59 by smiro            ###   ########.fr       */
+/*   Updated: 2023/04/15 20:04:39 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef struct s_complex
 {
