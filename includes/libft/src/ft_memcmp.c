@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 13:27:39 by seba              #+#    #+#             */
-/*   Updated: 2022/10/27 21:17:47 by smiro            ###   ########.fr       */
+/*   Created: 2022/08/11 11:03:12 by seba              #+#    #+#             */
+/*   Updated: 2022/08/15 22:34:59 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	void	*temp;
-	t_list	*head;
-	t_list	*new;
+	size_t	i;
 
-	head = NULL;
-	while (lst)
+	i = 0;
+	while (i < n)
 	{
-		temp = (*f)(lst->content);
-		new = ft_lstnew(temp);
-		if (!new)
+		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
 		{
-			ft_lstclear(&head, (*del));
-			del(temp);
-			return (NULL);
+			if (*(unsigned char *)(s1 + i) > *(unsigned char *)(s2 + i))
+				return (1);
+			else
+				return (-1);
 		}
-		ft_lstadd_back(&head, new);
-		lst = lst->next;
+		i++;
 	}
-	return (head);
+	return (0);
 }

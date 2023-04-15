@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 17:27:49 by seba              #+#    #+#             */
-/*   Updated: 2022/10/30 17:22:09 by smiro            ###   ########.fr       */
+/*   Created: 2022/08/11 11:01:46 by seba              #+#    #+#             */
+/*   Updated: 2022/08/16 12:34:57 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
-t_list	*ft_lstnew(void *content)
+void	ft_bzero(void *s, size_t n)
 {
-	t_list	*res;
-
-	res = malloc(sizeof(t_list));
-	if (!res)
-		return (NULL);
-	res->content = content;
-	res->next = NULL;
-	return (res);
+	ft_memset(s, 0, n);
+	return ;
 }

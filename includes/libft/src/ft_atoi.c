@@ -6,33 +6,23 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:01:05 by seba              #+#    #+#             */
-/*   Updated: 2022/11/19 21:05:08 by smiro            ###   ########.fr       */
+/*   Updated: 2022/08/12 21:20:42 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_atoi(const char *n)
-{
-	int	m;
-	int	b;
-	int	i;
+int	ft_atoi(const char *n) {
+	int	i = 0;
+	int	m = 1;
+	int	b = 0;
 
-	i = 0;
-	m = 1;
-	b = 0;
-	while (n[i] == ' ' || n[i] == '\f' || n[i] == '\n'
-		|| n[i] == '\r' || n[i] == '\t' || n[i] == '\v')
+	while (ft_isspace(n[i]))
 		i++;
 	if (n[i] == '+' || n[i] == '-')
-	{
-		if (n[i] == '-')
+		if (n[i++] == '-')
 			m = -m;
-		i++;
-	}
-	while (n[i] >= '0' && n[i] <= '9')
-	{
+	while (n[i] >= '0' && n[i] <= '9') {
 		b = b * 10 + (n[i] - '0');
 		i++;
 	}

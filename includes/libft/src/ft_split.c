@@ -6,88 +6,89 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:20 by seba              #+#    #+#             */
-/*   Updated: 2022/10/28 11:39:01 by smiro            ###   ########.fr       */
+/*   Updated: 2022/08/19 12:28:07 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	n_words(char const *s, char c)
+static size_t	totalpalabras(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] == c)
-		i++;
 	j = 0;
 	if (ft_strlen(s) == 0)
 		return (1);
 	while (s[i])
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (s[i] == c)
+		{
 			j++;
+			while (s[i] == c)
+				i++;
+			i--;
+		}
 		i++;
 	}
-	return (j + 1);
+	return (j + 2);
 }
 
-static size_t	n_letters(char const *s, size_t j, char c)
+static size_t	totalletras(char const *s, size_t *j, char c)
 {
 	size_t	i;
 	size_t	m;
 
-	m = j;
-	while (s[j] != c && s[j])
-		j++;
-	i = j - m;
+	m = *j;
+	while (s[*j] != c && s[*j])
+		*j = *j + 1;
+	i = *j - m;
+	while (s[*j] == c)
+		*j = *j + 1;
 	return (i);
 }
 
-static char	**ft_free(int i, char **str)
+static void	protect(int i, char **str)
 {
-	while (i > 0)
+	int	j;
+
+	if (i != 0)
 	{
-		i--;
-		free(str[i]);
+		j = 0;
+		while (j <= i)
+		{
+			free(str[j]);
+			j++;
+		}
 	}
 	free(str);
-	return (NULL);
-}
-
-static char	**ft_fill(char **str, const char *s, size_t wrds, char c)
-{
-	size_t	i;
-	size_t	t;
-	size_t	l;
-
-	t = 0;
-	while (s[t] && s[t] == c)
-		t++;
-	i = 0;
-	l = 0;
-	while (i < wrds - 1)
-	{
-		t = t + l;
-		l = n_letters(s, t, c);
-		str[i] = ft_substr(s, t, l);
-		if (!str[i])
-			return (ft_free((int)i, str));
-		while (s[t + l] == c)
-			t++;
-		i++;
-	}
-	return (str);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**str;
-	size_t	wrds;
+	char	*s2;
+	size_t	i;
+	size_t	j;
+	size_t	t;
 
-	wrds = n_words(s, c);
-	str = ft_calloc(wrds, sizeof(char *));
+	j = 0;
+	i = 0;
+	s2 = ft_strtrim(s, &c);
+	str = ft_calloc(totalpalabras(s2, c), sizeof(char *));
 	if (!str)
 		return (NULL);
-	return (ft_fill(str, s, wrds, c));
+	while (i < totalpalabras(s2, c) - 1)
+	{
+		t = j;
+		str[i] = ft_substr(s2, t, totalletras(s2, &j, c));
+		if (!str[i])
+		{
+			protect((int)i, str);
+			return (NULL);
+		}
+		i++;
+	}
+	return (str);
 }

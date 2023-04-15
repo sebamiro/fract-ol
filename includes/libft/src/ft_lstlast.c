@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 11:04:29 by seba              #+#    #+#             */
-/*   Updated: 2022/10/27 18:24:18 by smiro            ###   ########.fr       */
+/*   Created: 2022/08/11 17:55:35 by seba              #+#    #+#             */
+/*   Updated: 2022/08/15 22:25:00 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
-char	*ft_strchr(const char *s, int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	while (*s && (char)c != *s)
-		s++;
-	if ((char)c == *s)
-		return ((char *)s);
-	return (0);
-}	
+	int		i;
+	t_list	*temp;
+
+	temp = lst;
+	i = 0;
+	while (i < ft_lstsize(lst) - 1)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (temp);
+}
