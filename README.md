@@ -8,7 +8,7 @@ Multithreaded fractal exploration program written in C
      make
      ./bin/fract-ol
 
-Parammeter list: \
+Parameter list: \
 \- Mandelbrot \
 \- Julia \
 \- Burning ship \
