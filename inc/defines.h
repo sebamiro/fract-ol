@@ -67,7 +67,7 @@ typedef struct s_fractol
 }								t_fractol;
 
 # define TH 6
-# define W 1928
-# define H 1080
+# define W 1294
+# define H 800
 
 #endif

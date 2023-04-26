@@ -41,12 +41,12 @@ all:
 			@$(MAKE) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
-			@printf "\rcompiling.. $(notdir $<)%20c"
+			@echo "compiling.. $(notdir $<)"
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)::	$(OBJ_DIR) $(DEP_DIR) $(OBJ)
 			@$(AR) $(NAME) $(OBJ)
-			@printf "\r$(basename $@): done%20c\n"
+			@echo "$(basename $@): done"
 
 $(OBJ_DIR):
 			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))

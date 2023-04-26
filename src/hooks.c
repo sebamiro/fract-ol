@@ -29,10 +29,6 @@ int	key_hook(int key, t_fractol *vars)
 	else if (key == 69 || key == 78 || key == 40 || key == 37)
 		change_iterations(key, vars);
 	else if (key == 35)
-		vars->value.patron *= -1;
-	else if (key >= 83 && key <= 92)
-		vars->value.patron = key - 82;
-	else if (key == 82)
 		vars->value.rep *= -1;
 	else if (key == 38)
 		change_julia(vars);

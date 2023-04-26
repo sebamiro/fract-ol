@@ -76,21 +76,22 @@ void	change_set(int key, t_fractol *fractol)
 		frac = "Burning Ship";
 	else if (key == 21)
 		frac = "Mandelbar";
-	else if (key == 22)
-		frac = "Heart";
 	else if (key == 23)
+		frac = "Heart";
+	else if (key == 22)
 		frac = "Buffalo";
-	else if (key == 24)
-		frac = "Perpendicular Mandelbrot";
-	else if (key == 25)
-		frac = "Celtic Mandelbrot";
 	else if (key == 26)
+		frac = "Perpendicular Mandelbrot";
+	else if (key == 28)
+		frac = "Celtic Mandelbrot";
+	else if (key == 25)
 		frac = "Celtic mandelbar";
-	else if (key == 27)
-		frac = "Celtic Perpendicular";
+	else if (key == 29)
+		frac = "Perpendicular Celtic";
 	else
 		return ;
 	frac = ft_strdup(frac);
 	fractol->function = get_function(str_tolower(frac));
+	free(fractol->set);
 	fractol->set = frac;
 }

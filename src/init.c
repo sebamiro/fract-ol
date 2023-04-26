@@ -82,7 +82,7 @@ t_fractol	*init_window(void *mlx, char *set)
 	if (!fractol)
 		exit(1);
 	if (!set)
-		set = "mandelbrot";
+		set = ft_strdup("mandelbrot");
 	fractol->set = set;
 	fractol->mlx.mlx = mlx;
 	fractol->mlx.win = mlx_new_window(fractol->mlx.mlx, W, H, "Fract-ol");

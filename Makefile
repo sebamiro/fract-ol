@@ -41,12 +41,12 @@ all:
 			@$(MAKE) $(BIN)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
-			@printf "\rcompiling.. $(notdir $<)%20c"
+			@echo "compiling.. $(notdir $<)"
 			@$(CC) $(CFLAGS) $(COMFLAGS) -c $< -o $@
 
 $(BIN):	$(OBJ_DIR) $(DEP_DIR) $(BIN_DIR) $(OBJ)
 			@$(CC) $(CFLAGS) $(LINKFLAGS) $(OBJ) -o $(BIN)
-			@printf "\r$(NAME): done%20c\n"
+			@echo "$(NAME): done"
 
 $(BIN_DIR):
 			@mkdir -p $@
